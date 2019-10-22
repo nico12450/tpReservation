@@ -32,5 +32,33 @@ public class VolDAO {
 		return l;
 		
 	}
+	
+	public static Vol getVolByNumber(String n) {
+		
+		EntityManager em = DatabaseHelper.createEntityManager();
+		
+		TypedQuery<Vol> query = em.createQuery("select v from Vol v where v.numVol=:n", Vol.class);
+		query.setParameter("n", n);
+		Vol v = query.getSingleResult();
+		
+		em.close();
+		
+		return v;
+	}
+	
+	public static List<Vol> getVolByVille(String d, String a) {
+		
+		EntityManager em = DatabaseHelper.createEntityManager();
+		
+		TypedQuery<Vol> query = em.createQuery("select v from Vol v where v.villeDepart=:d and v.villeArrivee=:a", Vol.class);
+		query.setParameter("d", d);
+		query.setParameter("a", a);
+		List<Vol> v = query.getResultList();
+		
+		em.close();
+		
+		return v;
+		
+	}
 
 }

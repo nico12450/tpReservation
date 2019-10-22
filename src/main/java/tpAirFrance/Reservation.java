@@ -22,21 +22,21 @@ public class Reservation {
 	private String prenom;
 	
 	@Column
-	private int age;
+	private Integer age;
 	
 	@ManyToOne
-	private Vol VolReserve;
+	private Vol volReserve;
 	
 	public Reservation() {
 		
 	}
 
-	public Reservation(String nom, String prenom, int age, Vol volReserve) {
+	public Reservation(String nom, String prenom, int age, Vol num) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.age = age;
-		VolReserve = volReserve;
+		this.volReserve = num;
 	}
 
 	public String getNom() {
@@ -64,11 +64,11 @@ public class Reservation {
 	}
 
 	public Vol getVolReserve() {
-		return VolReserve;
+		return volReserve;
 	}
 
 	public void setVolReserve(Vol volReserve) {
-		VolReserve = volReserve;
+		volReserve = volReserve;
 	}
 
 	public Long getId() {
@@ -77,7 +77,7 @@ public class Reservation {
 
 	@Override
 	public String toString() {
-		return "Reservation [nom=" + nom + ", prenom=" + prenom + ", age=" + age + ", VolReserve=" + VolReserve + "]";
+		return "Reservation [nom=" + nom + ", prenom=" + prenom + ", age=" + age + ", VolReserve=" + volReserve + "]";
 	}
 	
 	

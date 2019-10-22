@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "vol")
@@ -24,7 +23,7 @@ public class Vol {
 	private Long id;
 	
 	@Column
-	private static String numVol;
+	private String numVol;
 	
 	@Enumerated(EnumType.STRING)
     @Column
@@ -42,18 +41,16 @@ public class Vol {
 	@Column
 	private LocalDateTime dateDepart;
 	
-	@Transient
-	private static int nbVols = 0;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "VolReserve")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "volReserve")
 	private List<Reservation> reservationsClients;
 	
 	public Vol() {
 		
 	}
 
-	public Vol(TypeAvion type, int nbPlaces, String villeDepart, String villeArrivee, LocalDateTime d) {
+	public Vol(String numVol, TypeAvion type, int nbPlaces, String villeDepart, String villeArrivee, LocalDateTime d) {
 		super();
+		this.numVol = numVol;
 		this.type = type;
 		this.nbPlaces = nbPlaces;
 		this.villeDepart = villeDepart;
@@ -66,7 +63,7 @@ public class Vol {
 	}
 
 	public void setNumVol(String numVol) {
-		Vol.numVol = numVol;
+		this.numVol = numVol;
 	}
 
 	public TypeAvion getType() {
@@ -125,13 +122,7 @@ public class Vol {
 	public String toString() {
 		
 		return "Vol [numVol=" + numVol + ", type=" + type + ", nbPlaces=" + nbPlaces + ", villeDepart=" + villeDepart
-				+ ", villeArrivee=" + villeArrivee + ", dateDepart=" + dateDepart + ", reservationsClients="
-				+ reservationsClients + "]";
-	}
-	
-	public static void ajoutVol() {
-		nbVols++;
-		numVol = Integer.toString(nbVols);
+				+ ", villeArrivee=" + villeArrivee + ", dateDepart=" + dateDepart+"]";
 	}
 
 }
